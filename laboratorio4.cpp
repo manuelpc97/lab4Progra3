@@ -11,7 +11,7 @@ void mostrarSubmarinos(int***);
 int*** declararMatriz();
 int submarinosContrarios(int***);
 int mostrarOpciones();
-
+void normal(int***);
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
@@ -38,8 +38,21 @@ int main(int argc, char*argv[]){
 				cout<<"Usted cuenta con "<<wave1<<" waves y con "<<expansive1<<" expansives"<<endl; 
 				ataque=mostrarOpciones();
 				if(ataque==1){
-
+					normal(tablero2);
 				} 
+				if(ataque==2){
+                                        normal(tablero2);
+                                }
+				if(ataque==3){
+                                        normal(tablero2);
+                                }
+                                if(ataque==4){
+                                        normal(tablero2);
+                                }
+				if(ataque==5){
+                                        normal(tablero2);
+                                }
+
 			}else if(jugador==2){
 			 	cout<<"-------------------------------Sus Submarinos (Player 2)---------------------------"<<endl;
                                 mostrarSubmarinos(tablero2);
@@ -48,8 +61,21 @@ int main(int argc, char*argv[]){
                                 cout<<"Usted cuenta con "<<wave2<<" waves y con "<<expansive2<<" expansives"<<endl;
 				ataque=mostrarOpciones();
                                 if(ataque==1){
-
+					normal(tablero1);
                                 }
+                                if(ataque==2){
+                                        normal(tablero1);
+                                }
+                                if(ataque==3){
+                                        normal(tablero1);
+                                }
+                                if(ataque==4){
+                                        normal(tablero1);
+                                }
+                                if(ataque==5){
+                                        normal(tablero1);
+                                }
+
 
 
 			}
@@ -144,4 +170,23 @@ int mostrarOpciones(){
 	cout<<"5. Ataque expansive"<<endl;
 	cin>>y;
 	return y;
+
+}
+void normal(int***n){
+	int x,y,z;
+
+	cout<<"ingrese la posicion en X"<<endl;
+	cin>>x;
+	cout<<"ingrese la posicion en Y"<<endl;
+	cin>>y;
+	cout<<"ingrese la posicion en Z"<<endl;
+	cin>>z;
+
+	if(n[x][y][z]==1){
+		n[x][y][z]=0;
+		cout<<"en la posicion ingresada existia una nave , existiaa porqué ya no :)"<<endl;
+	}else{
+		cout<<"en la posicion ingresada no existe  una nave , :(  :'("<<endl;
+	}
+
 }
