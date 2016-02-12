@@ -11,7 +11,10 @@ void mostrarSubmarinos(int***);
 int*** declararMatriz();
 int submarinosContrarios(int***);
 int mostrarOpciones();
-
+void wavexy(int***);
+void wavexz(int***);
+void waveyz(int***);
+			
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
@@ -144,4 +147,19 @@ int mostrarOpciones(){
 	cout<<"5. Ataque expansive"<<endl;
 	cin>>y;
 	return y;
+}
+
+void wavexy(int*** b){
+	int num;
+	cout<<"Ingrese su coordenada en z"<<endl;
+	cin>>num;
+
+	for(int i = 0; i<12;i++){
+		for(int j = 0; j<12;j++){
+			if(b[i][j][num]==1){
+				b[i][j][num]==0;
+				cout<<"Usted ha asesinado a un barquito en la posicion ("<< i<<","<<j<<","<<num<<")"<<endl;
+			}
+		}
+	}
 }
