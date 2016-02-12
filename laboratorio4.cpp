@@ -10,13 +10,18 @@ void llenarMatriz(int***);
 void mostrarSubmarinos(int***);
 int*** declararMatriz();
 int submarinosContrarios(int***);
+int mostrarOpciones();
+
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
+	int ataque=0;
 	int jugador = 1;
 	bool jugar=true;
 	bool seguir = true;
 	int decision=0;
+	int wave1=3, wave2=3;
+	int expansive1=3, expansive2=3;
 	int*** tablero1=declararMatriz();
 	int*** tablero2 = declararMatriz();
 		
@@ -26,7 +31,28 @@ int main(int argc, char*argv[]){
 		llenarMatriz(tablero2);
 	
 		while(jugar){
-		
+			if(jugador==1){
+				cout<<"-------------------------------Sus Submarinos (Player 1)---------------------------"<<endl;
+				mostrarSubmarinos(tablero1);
+				cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero2)<<" submarinos"<<endl;
+				cout<<"Usted cuenta con "<<wave1<<" waves y con "<<expansive1<<" expansives"<<endl; 
+				ataque=mostrarOpciones();
+				if(ataque==1){
+
+				} 
+			}else if(jugador==2){
+			 	cout<<"-------------------------------Sus Submarinos (Player 2)---------------------------"<<endl;
+                                mostrarSubmarinos(tablero2);
+                                cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero1)<<" submarinos"<<endl;
+				cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero2)<<" submarinos"<< endl;
+                                cout<<"Usted cuenta con "<<wave2<<" waves y con "<<expansive2<<" expansives"<<endl;
+				ataque=mostrarOpciones();
+                                if(ataque==1){
+
+                                }
+
+
+			}
 		}
 
 
@@ -108,4 +134,14 @@ int contador=0;
 	return contador;	
 }
 
-
+int mostrarOpciones(){
+	int y;
+	cout<<"Seleccione su ataque: "<<endl;
+	cout<<"1. Ataque normal "<<endl;
+	cout<<"2. Ataque wave en x y"<<endl;
+	cout<<"3. Ataque wave en x z"<<endl;
+	cout<<"4. Ataque wave en y z"<<endl;
+	cout<<"5. Ataque expansive"<<endl;
+	cin>>y;
+	return y;
+}
