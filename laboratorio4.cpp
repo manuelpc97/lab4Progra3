@@ -16,6 +16,7 @@ void wavexz(int***);
 void waveyz(int***);
 void normal(int***);
 void eliminar(int***);
+void expansive(int***);
 
 
 int main(int argc, char*argv[]){
@@ -81,7 +82,12 @@ int main(int argc, char*argv[]){
 					        
                                 }
 				if(ataque==5){
-                                        
+                                 	if(expansive1!=0){
+						expansive(tablero2);
+						expansive1--;
+					}else if(expansive1==0){
+						cout<<"Usted ya no tiene expansives"<<endl;
+					}       
                                 }
 				barcos = submarinosContrarios(tablero2);	
 				if(barcos==0){
@@ -128,7 +134,13 @@ int main(int argc, char*argv[]){
                                         
                                 }
                                 if(ataque==5){
-                                        
+                                 	if(expansive2!=0){
+                                                expansive(tablero1);
+                                                expansive2--;
+                                        }else if(expansive2==0){
+                                                cout<<"Usted ya no tiene expansives"<<endl;
+                                        }
+       
                                 }
 				
 				barcos = submarinosContrarios(tablero1);
@@ -346,6 +358,7 @@ void waveyz(int*** b){
         }
 }
 
+
 void eliminar(int*** h){
 	for(int i = 0; i<12;i++){
 		for(int j = 0;j<12;j++){
@@ -358,3 +371,37 @@ void eliminar(int*** h){
 	}
 	delete[] h;
 }
+
+void expansive(int*** n){
+	int x,y,z;
+	bool error=true;
+	while(error){
+		cout<<"ingrese la posicion en X"<<endl;
+        	cin>>x;
+        	cout<<"ingrese la posicion en Y"<<endl;
+        	cin>>y;
+        	cout<<"ingrese la posicion en Z"<<endl;
+        	cin>>z;
+		if((x>=1 &&x<=10) && (y>=1 &&y<=10) && (z>=1 &&z<=10)){
+			error=false;
+		}else{
+			cout<<"Sus coordenadas son malas, vuelva a ingresarlas"<<endl;
+		}
+	}
+	
+		for(int i=x-1;i<x+2;i++){
+			for(int j=y-1;j<y+2;j++){
+				  for(int k=z-1;k<z+2;k++){
+					if(n[i][j][k]==1){
+						n[i][j][k]=0;
+						cout<<"Ha destruido un barco en ("<<i<<","<<j<<","<<k<<","<<endl;
+					}else{
+						cout<<"Nada que destruir"<<endl;
+					}			
+		                  }
+			}
+		}
+} 
+
+
+
