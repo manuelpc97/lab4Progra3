@@ -14,10 +14,12 @@ int mostrarOpciones();
 void wavexy(int***);
 void wavexz(int***);
 void waveyz(int***);
-			
+void normal(int***);
+
 
 int main(int argc, char*argv[]){
 	srand(time(NULL));
+	int barcos;
 	int ataque=0;
 	int jugador = 1;
 	bool jugar=true;
@@ -37,24 +39,101 @@ int main(int argc, char*argv[]){
 			if(jugador==1){
 				cout<<"-------------------------------Sus Submarinos (Player 1)---------------------------"<<endl;
 				mostrarSubmarinos(tablero1);
+				
+				cout<<"Usted cuenta con "<<submarinosContrarios(tablero1)<<"submarinos"<<endl;
 				cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero2)<<" submarinos"<<endl;
 				cout<<"Usted cuenta con "<<wave1<<" waves y con "<<expansive1<<" expansives"<<endl; 
 				ataque=mostrarOpciones();
 				if(ataque==1){
-
+					normal(tablero2);
 				} 
+				if(ataque==2){
+					if(wave1!=0){
+                                		wavexy(tablero2);
+						wave1--;
+					}else if(wave1==0){
+						cout<<"Usted ya no tiene waves"<<endl;
+					}        
+                                }
+				if(ataque==3){
+                                	if(wave1!=0){
+                                                wavexz(tablero2);
+                                                wave1--;
+                                        }else if(wave1==0){
+                                                cout<<"Usted ya no tiene waves"<<endl;
+                                        }
+	
+					       
+                                }
+                                if(ataque==4){
+					if(wave1!=0){
+                                                waveyz(tablero2);
+                                                wave1--;
+                                        }else if(wave1==0){
+                                                cout<<"Usted ya no tiene waves"<<endl;
+                                        }
+                                	
+					        
+                                }
+				if(ataque==5){
+                                        
+                                }
+				barcos = submarinosContrarios(tablero2);	
+				if(barcos==0){
+					cout<<"Jugador 1 ha ganado"<<endl;
+					jugar=false;
+				}else if(barcos>0){
+					jugador=2;
+				}
 			}else if(jugador==2){
 			 	cout<<"-------------------------------Sus Submarinos (Player 2)---------------------------"<<endl;
                                 mostrarSubmarinos(tablero2);
-                                cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero1)<<" submarinos"<<endl;
-				cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero2)<<" submarinos"<< endl;
+                                cout<<"Usted cuenta con "<<submarinosContrarios(tablero2)<<" submarinos"<<endl;
+				cout<<"Su contrario cuenta con "<<submarinosContrarios(tablero1)<<" submarinos"<< endl;
                                 cout<<"Usted cuenta con "<<wave2<<" waves y con "<<expansive2<<" expansives"<<endl;
 				ataque=mostrarOpciones();
                                 if(ataque==1){
-
+					normal(tablero1);
                                 }
+                                if(ataque==2){
+                                 	if(wave2!=0){
+                                                wavexy(tablero1);
+                                                wave2--;
+                                        }else if(wave2==0){
+                                                cout<<"Usted ya no tiene waves"<<endl;
+                                        }
+       
+                                }
+                                if(ataque==3){
+					if(wave2!=0){
+                                                wavexz(tablero1);
+                                                wave2--;
+                                        }else if(wave2==0){
+                                                cout<<"Usted ya no tiene waves"<<endl;
+                                        }
+                                        
+                                }
+                                if(ataque==4){
+					if(wave2!=0){
+                                                waveyz(tablero1);
+                                                wave2--;
+                                        }else if(wave2==0){
+                                                cout<<"Usted ya no tiene waves"<<endl;
+                                        }
+                                        
+                                }
+                                if(ataque==5){
+                                        
+                                }
+				
+				barcos = submarinosContrarios(tablero1);
 
-
+				if(barcos==0){
+					cout<<"El jugador 2 ha ganado"<<endl;
+					jugar=false;
+				}else if(barcos>0){
+					jugador=1;
+				}
 			}
 		}
 
@@ -147,6 +226,25 @@ int mostrarOpciones(){
 	cout<<"5. Ataque expansive"<<endl;
 	cin>>y;
 	return y;
+
+}
+void normal(int***n){
+	int x,y,z;
+
+	cout<<"ingrese la posicion en X"<<endl;
+	cin>>x;
+	cout<<"ingrese la posicion en Y"<<endl;
+	cin>>y;
+	cout<<"ingrese la posicion en Z"<<endl;
+	cin>>z;
+
+	if(n[x][y][z]==1){
+		n[x][y][z]=0;
+		cout<<"en la posicion ingresada existia una nave , existiaa porqué ya no :)"<<endl;
+	}else{
+		cout<<"en la posicion ingresada no existe  una nave , :(  :'("<<endl;
+	}
+
 }
 
 void wavexy(int*** b){
@@ -163,3 +261,34 @@ void wavexy(int*** b){
 		}
 	}
 }
+
+void wavexz(int*** b){
+        int num;
+        cout<<"Ingrese su coordenada en y"<<endl;
+        cin>>num;
+
+        for(int i = 0; i<12;i++){
+                for(int j = 0; j<12;j++){
+                        if(b[i][num][j]==1){
+                                b[i][num][j]==0;
+                                cout<<"Usted ha asesinado a un barquito en la posicion ("<< i<<","<<num<<","<<j<<")"<<endl;
+                        }
+                }
+        }
+}
+
+void waveyz(int*** b){
+        int num;
+        cout<<"Ingrese su coordenada en x"<<endl;
+        cin>>num;
+
+        for(int i = 0; i<12;i++){
+                for(int j = 0; j<12;j++){
+                        if(b[num][i][j]==1){
+                                b[num][i][j]==0;
+                                cout<<"Usted ha asesinado a un barquito en la posicion ("<< num<<","<<i<<","<<j<<")"<<endl;
+                        }
+                }
+        }
+}
+
