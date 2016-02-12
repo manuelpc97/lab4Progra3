@@ -292,3 +292,25 @@ void waveyz(int*** b){
         }
 }
 
+void expansive(int*** n){
+	int x,y,z;
+	cout<<"ingrese la posicion en X"<<endl;
+        cin>>x;
+        cout<<"ingrese la posicion en Y"<<endl;
+        cin>>y;
+        cout<<"ingrese la posicion en Z"<<endl;
+        cin>>z;
+	if((x>=1 &&x<=10) && (y>=1 &&y<=10) && (y>=1 &&y<=10)){
+		for(int i=x-1;i<x+2;i++){
+			for(int j=y-1;j<y+2;j++){
+				  for(int k=z-1;k<z+2;k++){
+					n[i][j][k]=0;			
+		                  }
+			}
+		}
+	}else{
+		cout<<"no puede ejecutar este ataque"<<endl
+		
+	} 
+
+}
