@@ -15,6 +15,7 @@ void wavexy(int***);
 void wavexz(int***);
 void waveyz(int***);
 void normal(int***);
+void eliminar(int***);
 
 
 int main(int argc, char*argv[]){
@@ -32,6 +33,10 @@ int main(int argc, char*argv[]){
 		
 
 	while(seguir){
+		wave1=3;
+		wave2=3;
+		expansive1=3;
+		expansive2=3;
 		llenarMatriz(tablero1);
 		llenarMatriz(tablero2);
 	
@@ -148,8 +153,10 @@ int main(int argc, char*argv[]){
 			seguir =true;
 		else
 			seguir =false;		
-	}	
-return 0;
+	}
+	eliminar(tablero1);	
+	eliminar(tablero2);
+	return 0;
 }
 
 
@@ -230,13 +237,20 @@ int mostrarOpciones(){
 }
 void normal(int***n){
 	int x,y,z;
-
-	cout<<"ingrese la posicion en X"<<endl;
-	cin>>x;
-	cout<<"ingrese la posicion en Y"<<endl;
-	cin>>y;
-	cout<<"ingrese la posicion en Z"<<endl;
-	cin>>z;
+	bool subd=true;
+	while(subd){
+		cout<<"ingrese la posicion en X"<<endl;
+		cin>>x;
+		cout<<"ingrese la posicion en Y"<<endl;
+		cin>>y;
+		cout<<"ingrese la posicion en Z"<<endl;
+		cin>>z;
+		if((x>=0&&x<=11)||(y>=0&&y<=11)||(z>=0&&z<=11)){
+			subd=false;
+		}else{
+			cout<<"Un numero esta incorrecto, vuelva a ingresar la coordenada"<<endl;
+		}
+	}
 
 	if(n[x][y][z]==1){
 		n[x][y][z]=0;
@@ -249,14 +263,27 @@ void normal(int***n){
 
 void wavexy(int*** b){
 	int num;
-	cout<<"Ingrese su coordenada en z"<<endl;
-	cin>>num;
+	bool s=true;
+	while(s){
+		cout<<"Ingrese su coordenada en y"<<endl;
+	        cin>>num;
+
+
+		if(num>=0&&num<=11){
+			s=false;
+		}else{
+			cout<<"Su numero es incorrecto"<<endl;
+		}
+	}
+	
 
 	for(int i = 0; i<12;i++){
 		for(int j = 0; j<12;j++){
 			if(b[i][j][num]==1){
-				b[i][j][num]==0;
+				b[i][j][num]=0;
 				cout<<"Usted ha asesinado a un barquito en la posicion ("<< i<<","<<j<<","<<num<<")"<<endl;
+			}else{
+				cout<<"Nada que destruir"<<endl;
 			}
 		}
 	}
@@ -264,31 +291,70 @@ void wavexy(int*** b){
 
 void wavexz(int*** b){
         int num;
-        cout<<"Ingrese su coordenada en y"<<endl;
-        cin>>num;
+	bool s=true;
+        while(s){
+		cout<<"Ingrese su coordenada en y"<<endl;
+	        cin>>num;
+
+
+                if(num>=0&&num<=11){
+                        s=false;
+                }else{
+                        cout<<"Su numero es incorrecto"<<endl;
+                }
+        }
+
+      
 
         for(int i = 0; i<12;i++){
                 for(int j = 0; j<12;j++){
                         if(b[i][num][j]==1){
-                                b[i][num][j]==0;
+                                b[i][num][j]=0;
                                 cout<<"Usted ha asesinado a un barquito en la posicion ("<< i<<","<<num<<","<<j<<")"<<endl;
-                        }
+                        }else{
+				cout<<"Nada que destruir"<<endl;
+			}
                 }
         }
 }
 
 void waveyz(int*** b){
         int num;
-        cout<<"Ingrese su coordenada en x"<<endl;
-        cin>>num;
+	bool s=true;
+        while(s){
+		cout<<"Ingrese su coordenada en x"<<endl;
+        	cin>>num;
+	
+                if(num>=0&&num<=11){
+                        s=false;
+                }else{
+                        cout<<"Su numero es incorrecto"<<endl;
+                }
+        }
+
+        
 
         for(int i = 0; i<12;i++){
                 for(int j = 0; j<12;j++){
                         if(b[num][i][j]==1){
-                                b[num][i][j]==0;
+                                b[num][i][j]=0;
                                 cout<<"Usted ha asesinado a un barquito en la posicion ("<< num<<","<<i<<","<<j<<")"<<endl;
-                        }
+                        }else{
+				cout<<"Nada que destruir"<<endl;
+			}
                 }
         }
 }
 
+void eliminar(int*** h){
+	for(int i = 0; i<12;i++){
+		for(int j = 0;j<12;j++){
+			delete[] h[i][j];
+		}
+	}
+	
+	for(int i =0; i<12; i++){
+		delete[] h[i];
+	}
+	delete[] h;
+}
