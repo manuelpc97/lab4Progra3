@@ -6,7 +6,7 @@ using std::endl;
 
 void llenarMatriz(int***);
 void mostrarSubmarinos(int***);
-void declararMatriz(int***);
+int*** declararMatriz();
 int submarinosContrarios(int***);
 
 int main(int argc, char*argv[]){
@@ -30,4 +30,35 @@ int main(int argc, char*argv[]){
 			seguir =false;		
 	}	
 return 0;
+}
+trarsubmarinos(int*** ñ){
+	for(int x=0;x<12;x++){
+		for(int y=0;y<12;y++){
+			for(int z=0;z<12;z++){
+					if(ñ[x][y][z]==1){
+						cout<<"("<<x<<","<<y<<","<<z<<")"<<endl;
+						
+					}
+			}	
+		}		
+	}
+
+
+}
+int submarinosContrarios(int*** ñ){
+int contador=0;
+	for(int x=0;x<12;x++){
+			for(int y=0;y<12;y++){
+				for(int z=0;z<12;z++){
+						if(ñ[x][y][z]==1){
+							contador++;					
+						}
+				}	
+			}		
+		}
+
+
+	}
+	return contador;	
+
 }
